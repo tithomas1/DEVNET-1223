@@ -1,0 +1,15 @@
+---
+-
+  hosts: test-routers
+  gather_facts: false
+  connection: local
+  vars_files:
+    - secrets.yaml
+
+  tasks:
+    - name: Apply a template-based config
+      iosxr_template:
+        src: confg.j2
+        provider: "{{ credentials }}"
+      register: result
+    - debug: var=result

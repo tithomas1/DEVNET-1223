@@ -1,0 +1,17 @@
+---
+-
+  hosts: test-routers
+  gather_facts: false
+  connection: local
+  vars_files:
+    - secrets.yaml
+
+  tasks:
+    - name: Run some commands
+      iosxr_command:
+        commands:
+          - show version
+          - show interfaces brief
+        provider: "{{ credentials }}"
+      register: result
+    - debug: var=result.stdout_lines

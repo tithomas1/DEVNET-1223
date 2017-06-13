@@ -1,0 +1,16 @@
+---
+-
+  hosts: test-routers
+  gather_facts: false
+  connection: local
+  vars_files:
+    - secrets.yaml
+
+  tasks:
+    - name: delete user
+      iosxr_config:
+        lines:
+          - no username {{ user }}
+        provider: "{{ credentials }}"
+      register: result
+    - debug: var=result

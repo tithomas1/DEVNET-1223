@@ -1,0 +1,31 @@
+---
+-
+  hosts: xr621-2
+  gather_facts: false
+  connection: local
+  vars_files:
+    - secrets.yaml
+
+  tasks:
+    - name: Initial keychain for MACSec
+      ydkMACsecModule:
+        keychain: CHAIN1
+        state: present
+        keys:
+          10:
+            key-string: '12485546375E5450087E727C6061754654325623030D0F710357544F417A0E01050102015F0853510C03514353510B585629716A1E5A495042315E5C50097F7778'
+            algorithm: aes-256-cmac
+            lifetime:
+              start-time: '00:00:00 AM'
+              start-date: 1-Jan-2017
+          20:
+            key-string: '11594D5544472859547F0A737D62137330524E5750030B0C020059563E437F0D01'
+            algorithm: aes-128-cmac
+            lifetime:
+              start-time: '00:00:00'
+              start-date: 1-May-2017
+              end-time: '11:59:59p'
+              end-date: 31-Dec-2017
+        provider: "{{ ydk }}"
+      register: result
+    - debug: var=result

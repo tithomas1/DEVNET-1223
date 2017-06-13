@@ -1,0 +1,17 @@
+---
+-
+  hosts: test-routers
+  gather_facts: false
+  connection: local
+  vars_files:
+    - secrets.yaml
+
+  tasks:
+    - name: High-level system settings
+      iosxr_system:
+        name_servers:
+          - 8.8.8.8
+          - 8.8.4.4
+        provider: "{{ credentials }}"
+      register: result
+    - debug: var=result

@@ -1,0 +1,15 @@
+---
+-
+  hosts: test-routers
+  gather_facts: false
+  connection: local
+  vars_files:
+    - secrets.yaml
+
+  tasks:
+    - name: Gather device info
+      iosxr_facts:
+        gather_subset: interfaces
+        provider: "{{ credentials }}"
+      register: iosxr_facts
+    - debug: var="{{ iosxr_facts | to_nice_json }}"

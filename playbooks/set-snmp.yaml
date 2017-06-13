@@ -1,0 +1,16 @@
+---
+-
+  hosts: test-routers
+  gather_facts: false
+  connection: local
+  vars_files:
+    - secrets.yaml
+
+  tasks:
+    - name: Set an snmpv2 community-string
+      iosxr_config:
+        lines:
+          - snmp-server community {{ community }}
+        provider: "{{ credentials }}"
+      register: result
+    - debug: var=result

@@ -1,0 +1,8 @@
+.DS_Store
+.idea/
+.dockerignore
+.gitignore
+Dockerfile
+Dockerfile.*
+addHosts
+profiles/

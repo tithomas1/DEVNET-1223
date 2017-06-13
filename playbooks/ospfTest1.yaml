@@ -1,0 +1,22 @@
+---
+-
+  hosts: xr621-2
+  gather_facts: false
+  connection: local
+  vars_files:
+    - secrets.yaml
+
+  tasks:
+    - name: OSPF process 2
+      ydkOspfModule:
+        process: 2
+        state: present
+        router-id: 2.2.2.2
+        areas:
+          0:
+            interfaces:
+              Loopback2:
+                passive: True
+        provider: "{{ ydk }}"
+      register: result
+    - debug: var=result

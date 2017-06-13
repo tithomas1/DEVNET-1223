@@ -1,0 +1,34 @@
+FROM ubuntu
+MAINTAINER Tim Thomas
+
+# This build is currently broken. The container exits when an ansible-playbook is run
+
+ENV INSTALL_PATH /app
+ENV HTTP_PROXY ${http_proxy}
+ENV HTTPS_PROXY ${http_proxy}
+
+RUN mkdir -p $INSTALL_PATH
+
+WORKDIR $INSTALL_PATH
+
+COPY . ./
+
+RUN apt-get update && apt-get -y upgrade
+
+# The cffi package is explicitly called out here because it looks like something
+# else (cryptography?) in the requirements is trying to reference it before the
+# build wheel for it completes. And of course it requires setuptools
+
+RUN apt-get install -y --no-install-recommends build-essential python-dev python-pip libffi-dev libssl-dev && \
+    apt-get install -y iputils-ping sudo && \
+    pip install --upgrade pip && \
+    pip install setuptools && \
+    pip install cffi==1.10.0 && \
+    pip install -r requirements.txt
+
+RUN useradd -d $INSTALL_PATH -s /bin/bash -U -M devnet && \
+    echo "devnet ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/devnet && \
+    chmod 0440 /etc/sudoers.d/devnet && \
+    chown -R devnet:devnet $INSTALL_PATH
+
+CMD ["su", "-", "devnet", "-c", "/bin/bash"]

@@ -1,0 +1,18 @@
+---
+-
+  hosts: test-routers
+  gather_facts: false
+  connection: local
+  vars_files:
+    - secrets.yaml
+
+  tasks:
+    - name: Apply arbitrary configuration commands
+      iosxr_config:
+        lines:
+          - description Local LAN
+          - ip address 10.1.1.1 255.255.255.0
+        parents: interface GigabitEthernet0/0/0/0
+        provider: "{{ credentials }}"
+      register: result
+    - debug: var=result

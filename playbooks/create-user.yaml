@@ -1,0 +1,18 @@
+---
+-
+  hosts: test-routers
+  gather_facts: false
+  connection: local
+  vars_files:
+    - secrets.yaml
+
+  tasks:
+    - name: Create new user
+      iosxr_config:
+        lines:
+          - group root-lr
+          - secret {{ password }}
+        parents: username {{ newuser }}
+        provider: "{{ credentials }}"
+      register: result
+    - debug: var=result
