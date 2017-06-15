@@ -1,0 +1,16 @@
+---
+-
+  hosts: xr621-2
+  gather_facts: false
+  connection: local
+  vars_files:
+    - secrets.yaml
+
+  tasks:
+    - name: Initial keychain for MACSec
+      ydkMACsecModule:
+        keychain: CHAIN1
+        state: absent
+        provider: "{{ ydk }}"
+      register: result
+    - debug: var=result
