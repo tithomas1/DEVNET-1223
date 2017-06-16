@@ -1,6 +1,6 @@
 ---
 -
-  hosts: xr621
+  hosts: test-routers
   gather_facts: false
   connection: local
   vars_files:
