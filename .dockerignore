@@ -2,6 +2,7 @@
 .idea/
 .dockerignore
 .gitignore
+.git
 Dockerfile
 Dockerfile.*
 addHosts
