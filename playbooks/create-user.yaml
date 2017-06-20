@@ -14,5 +14,6 @@
           - secret {{ password }}
         parents: username {{ newuser }}
         provider: "{{ credentials }}"
+        backup: yes
       register: result
     - debug: var=result
