@@ -1,5 +1,10 @@
 # __Cisco Live 2017 - DEVNET-1223__
-Session: Automating IOS-XR with Ansible
+Workshop: Automating IOS-XR with Ansible
+
+The workshop is meant to be a basic introduction to using Ansible with IOS-XR. It includes
+how to set up IOS-XR to allow Ansible access (primarily to the console/exec CLI), an
+overview of the existing Ansible iosxr_* modules, and an intro to the possibility of using
+the YANG Development Kit (YDK) in custom Ansible modules.
 
 ## Setting up IOS-XR to allow Ansible
 
@@ -13,19 +18,26 @@ Enable SSH version 2 and set a reasonable timeout:
 
 ```commandline
 config t
-  ssh version 2
+  ssh version v2
   ssh timeout 120
   commit
   exit
 ```
 
 This should be enough to try a simple command from your Ansible host. Make sure the target
-device is already defined in your inventory:
+device is already defined in your inventory. In this case, we'll use the *raw* command as
+a test to pass a command over SSH to the IOS-XR CLI and dump the output. The *-u* parameter
+specifies the SSH username, the *-k* parameter will trigger a prompt for the SSH password,
+the *-m* specifies to use the *raw* command, and the *-a* provides the arguments to the
+command/module.
 
 ```commandline
 ansible <host> -u <username> -k -m raw -a "show version"
 ```
 
+The first time you'll have to accept the SSH keys. You can also set up IOS-XR to use
+certificate-based authentication for SSH, but that's outside the scope of this README at
+the moment.
 
 ### Example playbooks
 Set an SNMP community string:
@@ -39,6 +51,19 @@ ansible-playbook playbooks/create_user.yaml --extra-vars="newuser=bob password=c
 Delete an existing user:
 ```commandline
 ansible-playbook playbooks/delete_user.yaml --extra-vars="user=bob"
+```
+
+## Setting up IOS-XR to allow NETCONF access (for YDK)
+
+Allow NETCONF over SSH:
+
+```commandline
+config t
+  ssh server netconf vrf default
+  ssh server netconf port 830
+  netconf-yang agent ssh
+  commit
+  exit
 ```
 
 ## Using YDK-Gen to create custom APIs
