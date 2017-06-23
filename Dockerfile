@@ -18,7 +18,7 @@ RUN apk add --no-cache py-pip openssl-dev libxslt && \
     pip install ydkGen/python/ciscolive_ansible_ospf-bundle/dist/ydk-models-ciscolive-ansible-ospf-0.0.1.tar.gz && \
     pip install ydkGen/python/ciscolive_ansible_macsec-bundle/dist/ydk-models-ciscolive-ansible-macsec-0.0.1.tar.gz && \
     apk del .build-deps && \
-    apk add --no-cache bash openssh-client sshpass sudo && \
+    apk add --no-cache bash openssh-client sshpass sudo tree && \
     adduser -h $INSTALL_PATH -s /bin/bash -D -H -u 1000 -G users devnet && \
     echo "devnet ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/devnet && \
     chmod 0440 /etc/sudoers.d/devnet && \
