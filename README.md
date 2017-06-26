@@ -6,6 +6,15 @@ how to set up IOS-XR to allow Ansible access (primarily to the console/exec CLI)
 overview of the existing Ansible iosxr_* modules, and an intro to the possibility of using
 the YANG Development Kit (YDK) in custom Ansible modules.
 
+Most of the contents of this repo are available via the *tithomas1/cl17devnet1223* container
+on the Docker Hub. To experiment with an actual IOS-XR instance (VM or physical), the inventory
+in the container is pre-built to include an *xr621* host. You can map a target IP for that host
+into the container and launch in Docker with:
+
+```commandline
+docker run -it --rm --network=host --add-host xr621:<ip address> tithomas1/cl17devnet1223
+```
+
 ## Setting up IOS-XR to allow Ansible
 
 Generate crypto keys on the target IOS-XR device:
