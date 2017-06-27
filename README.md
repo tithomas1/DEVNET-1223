@@ -17,7 +17,7 @@ docker run -it --rm --network=host --add-host xr621:<ip address> tithomas1/cl17d
 
 ## Setting up IOS-XR to allow Ansible
 
-Generate crypto keys on the target IOS-XR device:
+If not done already, generate crypto keys on the target IOS-XR device:
 
 ```commandline
 crypto key generate rsa
@@ -35,9 +35,9 @@ config t
 
 This should be enough to try a simple command from your Ansible host. Make sure the target
 device is already defined in your inventory. In this case, we'll use the *raw* command as
-a test to pass a command over SSH to the IOS-XR CLI and dump the output. The *-u* parameter
-specifies the SSH username, the *-k* parameter will trigger a prompt for the SSH password,
-the *-m* specifies to use the *raw* command, and the *-a* provides the arguments to the
+a test to pass a command over SSH to the IOS-XR CLI and dump the output. The `-u` parameter
+specifies the SSH username, the `-k` parameter will trigger a prompt for the SSH password,
+the `-m` specifies to use the *raw* command, and the `-a` provides the arguments to the
 command/module.
 
 ```commandline
@@ -77,7 +77,7 @@ config t
 
 ## Using YDK-Gen to create custom APIs
 
-YDK's *generate* tool can be used to create custom/targeted APIs for specific use cases. Or it
+YDK's `generate` tool can be used to create custom/targeted APIs for specific use cases. Or it
 might also be needed if a particular model isn't included in what comes with YDK (like the
 IETF or OpenConfig models). I ended up needing to do my own because the OpenConfig interfaces
 model wasn't included.
@@ -112,7 +112,7 @@ Install YDK-Gen's module dependencies into the virtual environment (this will ta
 ```commandline
 pip install -r requirements.txt
 ```
-Now *generate* should work. As a test:
+Now `generate` should work. As a test:
 
 ```commandline
 ./generate.py --help
