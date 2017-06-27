@@ -7,4 +7,5 @@ Dockerfile
 Dockerfile.*
 addHosts
 profiles/
+guide/
 *.scpt
