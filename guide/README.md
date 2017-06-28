@@ -62,7 +62,7 @@ structure (there’s a little more than what’s shown here):
 
 The ~/ansible.cfg file contains a few Ansible settings specific to this workshop. The
 global settings are normally good enough, but there are lots of possible overrides
-(see http://docs.ansible.com/ansible/intro_configuration.html.
+(see http://docs.ansible.com/ansible/intro_configuration.html).
 
 Within this lab, the target host(s) is specified under ~/inventory (in the “hosts” file).
 Normally the default location is `/etc/ansible/hosts`, but we’re using a configuration
