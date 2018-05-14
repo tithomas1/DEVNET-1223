@@ -99,9 +99,9 @@ git clone https://github.com/CiscoDevNet/ydk-gen
 cd ydk-gen
 ```
 
-Doing this in a virtual environment is not a bad idea. If you want to use the generated API
-for an Ansible module, then it will need to be present in the global package list. We'll get
-to more on that later.
+Doing this in a virtual environment is not a bad idea, but you'll need to override where
+Ansible looks for the default Python interpreter. Otherwise, the generated API will need
+to be present in the global package list. We'll get to more on that later.
 
 ```commandline
 virtualenv -p python2.7 venv
@@ -139,9 +139,24 @@ API for something other than Ansible:
 ```commandline
 pip install gen-api/python/ciscolive_ansible_ospf-bundle/dist/ydk*.tar.gz
 ```
-If you're ready to try Ansible + YDK, you'll need to back out of the virtual environment and install YDK
-and your custom API (if any) into the global package list. Ansible doesn't pick up the "hooks" needed to
-be aware of the virtual environment, therefore you have to use the global list:
+If you're ready to try Ansible + YDK, you can override where Ansible looks for the default Python
+interpreter in the virtual environment. Add the following to the inventory:
+
+```commandline
+[vars:all]
+ansible_python_interpreter="/usr/bin/env python"
+```
+
+Now you can install YDK and your custom API (if any):
+
+```commandline
+pip install -r requirements.txt
+pip install gen-api/python/ydk/dist/ydk*.tar.gz
+pip install gen-api/python/ciscolive_ansible_ospf-bundle/dist/ydk*.tar.gz
+```
+
+If you don't want to use a virtual environment, then just install YDK and your custom API in the
+global package list:
 
 ```commandline
 deactivate
