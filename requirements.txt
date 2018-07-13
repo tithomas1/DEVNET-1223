@@ -12,7 +12,7 @@ lxml==3.8.0
 MarkupSafe==1.0
 ncclient==0.5.3
 packaging==16.8
-paramiko==2.1.2
+paramiko>=2.1.5
 pyang==1.6
 pyasn1==0.2.3
 pybind11==2.0.1
