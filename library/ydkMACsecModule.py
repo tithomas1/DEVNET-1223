@@ -114,8 +114,8 @@ NETCONF_PORT = 830
 #
 # The time can be 24-hour (military) or 12-hour optionally appended with am or pm
 
-TIME_PATTERN = re.compile('^([0-1]?\d|2[0-3])(?::([0-5]?\d))?(?::([0-5]?\d))?\s?(?i)([ap](?:m?))?$')
-DATE_PATTERN = re.compile('^([0-2]?\d|3[01])-([a-z]{3})-(20\d{2})$')
+TIME_PATTERN = re.compile(r'^([0-1]?\d|2[0-3])(?::([0-5]?\d))?(?::([0-5]?\d))?\s?(?i)([ap](?:m?))?$')
+DATE_PATTERN = re.compile(r'^([0-2]?\d|3[01])-([a-z]{3})-(20\d{2})$')
 
 DEFAULT_CRYPTO = 'aes_256_cmac'
 
