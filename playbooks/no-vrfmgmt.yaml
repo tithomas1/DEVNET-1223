@@ -1,0 +1,15 @@
+---
+-
+  hosts: '{{ hosts }}'
+  gather_facts: false
+  connection: local
+  vars_files:
+    - secrets.yaml
+
+  tasks:
+    - name: XR move mgmt int to default vrf
+      no-vrfmgmt: 
+        provider: "{{ credentials }}"
+      when: network_os == 'XR'
+      register: result
+    - debug: var=result.stdout_lines

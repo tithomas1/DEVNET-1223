@@ -1,2 +1,9 @@
-[test-routers]
-xr621
+[core]
+xr1
+xr2
+xr3
+xr4
+
+[csr]
+csr1
+csr2

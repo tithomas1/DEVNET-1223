@@ -1,0 +1,32 @@
+---
+- hosts: '{{ hosts }}' 
+  gather_facts: no
+  connection: local
+
+  tasks:
+  - name: gather authenication 
+    include_vars: auth.yml
+
+  - name: XR disable cdp on mgmt interface  
+    iosxr_config:
+      lines: 
+        - no cdp  
+      parents: interface MgmtEth0/0/CPU0/0
+      provider: "{{ credentials }}"
+    when: network_os == 'XR'
+    register: output 
+
+  - debug: var=output.stdout_lines
+    when: network_os == 'XR'
+
+  - name: XE disable cdp on mgmt int gi1
+    ios_config:
+      provider: "{{ credentials }}"
+      lines: 
+        - no cdp enable
+      parents: interface gi1 
+    when: network_os == 'XE'
+    register: output
+
+  - debug: var=output.stdout_lines
+    when: network_os == 'XE'

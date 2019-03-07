@@ -1,0 +1,7 @@
+! snmpv3 configuration for IOS XR 
+snmp-server ifindex persist
+snmp-server entityindex persist
+snmp-server user wae WAE v3 auth sha encrypted 05080F1C22431F5B4A priv aes 128 encrypted 05080F1C22431F5B4A
+snmp-server group WAE v3 priv notify v1default
+snmp-server context WAE
+snmp-server trap-source MgmtEth0/0/CPU0/0

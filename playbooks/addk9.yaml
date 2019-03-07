@@ -1,0 +1,15 @@
+---
+-
+  hosts: '{{ hosts }}'
+  gather_facts: false
+  connection: local
+  vars_files:
+    - secrets.yaml
+
+  tasks:
+    - name: test install add k9 
+      addK9: 
+        provider: "{{ credentials }}"
+      when: network_os == 'XR'
+      register: result
+    - debug: var=result.stdout_lines

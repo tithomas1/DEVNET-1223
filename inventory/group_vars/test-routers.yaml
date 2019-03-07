@@ -1,6 +1,0 @@
----
-# Can override the YDK authentication on per-group or host basis if needed
-# ydk:
-#  host: "{{ inventory_hostname }}"
-#  username: cisco
-#  password: cisco

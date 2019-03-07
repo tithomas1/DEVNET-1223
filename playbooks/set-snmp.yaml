@@ -1,16 +1,26 @@
 ---
 -
-  hosts: test-routers
+  hosts: '{{ hosts }}' 
   gather_facts: false
   connection: local
   vars_files:
     - secrets.yaml
 
   tasks:
-    - name: Set an snmpv2 community-string
+    - name: Set an snmpv2 community-string XR 
       iosxr_config:
         lines:
           - snmp-server community {{ community }}
         provider: "{{ credentials }}"
+      when: network_os == 'XR' 
       register: result
     - debug: var=result
+
+    - name: Set snmpv2 communitiy XE 
+      ios_config: 
+        lines: 
+          - snmp-server community {{ community }}
+        provider: "{{ credentials }}" 
+      when: network_os == 'XE' 
+      register: output
+    - debug: var=output

@@ -1,0 +1,25 @@
+---
+-
+  hosts: '{{ hosts }}'
+  gather_facts: false
+  connection: local
+  vars_files:
+    - secrets.yaml
+
+  tasks:
+    - name: XR SNMPv3 Configuration
+      iosxr_config:
+        provider: "{{ credentials }}"
+        src: /app/playbooks/templates/xr-snmpv3.txt
+      when: network_os=='XR'
+      register: result
+    - debug: var=result
+
+    - name: XE SNMPv3 Configuration
+      ios_config:
+        provider: "{{ credentials }}"
+        src: /app/playbooks/templates/xe-snmpv3.txt
+      when: network_os=='XE'
+      register: output
+    - debug: var=output
+

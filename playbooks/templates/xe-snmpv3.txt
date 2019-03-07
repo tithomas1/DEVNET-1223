@@ -1,0 +1,5 @@
+! IOS XE SNMPv3 Config
+snmp-server user wae WAE v3 auth sha cisco123 priv aes 128 cisco123
+snmp-server group WAE v3 priv 
+snmp-server context WAE
+snmp ifmib ifindex persist

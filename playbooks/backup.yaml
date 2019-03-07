@@ -7,23 +7,18 @@
     - secrets.yaml
 
   tasks:
-    - name: Create new user XR 
+    - name: backup XR
       iosxr_config:
-        lines:
-          - group root-lr
-          - secret {{ password }}
-        parents: username {{ newuser }}
         provider: "{{ credentials }}"
         backup: yes
       when: network_os == 'XR' 
       register: result
     - debug: var=result
 
-    - name: Create new user XE 
+    - name: backup XE 
       ios_config: 
         provider: "{{ credentials }}"
-        lines: 
-          - username {{ newuser }} privilege 15 secret cisco 
+        backup: yes  
       when: network_os == 'XE' 
       register: output 
     - debug: var=output 
