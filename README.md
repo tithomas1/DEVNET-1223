@@ -3,10 +3,10 @@
 
 Content here originally utlized for 2017 DEVNET_1223 Workshop: Automating IOS-XR with Ansible
     Co-authored with Tim Thomas
-    Reference: https://github.com/tithomas1/DEVNET-1223 
-    
-    
-    
+    Reference: https://github.com/tithomas1/DEVNET-1223
+
+
+
 ## Setting up IOS-XR to allow Ansible
 
 If not done already, generate crypto keys on the target IOS-XR device:
@@ -54,8 +54,6 @@ Delete an existing user:
 ansible-playbook playbooks/delete_user.yaml --extra-vars="user=bob"
 ```
 
-<<<<<<< HEAD
-=======
 ## Setting up IOS-XR to allow NETCONF access (for YDK)
 
 Allow NETCONF over SSH:
@@ -158,4 +156,3 @@ sudo pip install -r requirements.txt
 sudo pip install gen-api/python/ydk/dist/ydk*.tar.gz
 sudo pip install gen-api/python/ciscolive_ansible_ospf-bundle/dist/ydk*.tar.gz
 ```
->>>>>>> origin/master
